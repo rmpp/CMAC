@@ -12,6 +12,15 @@ public class CmacKeys {
 		this.cbcRawKey=null;
 	}
 
+	public CmacKeys(byte[] key1, byte[] key2, byte[] cbcRawKey) {
+		super();
+		this.key1 = key1;
+		this.key2 = key2;
+		this.cbcRawKey = cbcRawKey;
+	}
+
+
+
 	public byte[] getKey1() {
 		return key1;
 	}

@@ -14,10 +14,12 @@ public class TestCmac {
 		byte[] key1 =  DatatypeConverter.parseHexBinary("fbeed618357133667c85e08f7236a8de");
 		byte[] key2 =  DatatypeConverter.parseHexBinary("f7ddac306ae266ccf90bc11ee46d513b");
 
+		byte[] iv = DatatypeConverter.parseHexBinary("00000000000000000000000000000000");
+
 		byte[] text= DatatypeConverter.parseHexBinary("6bc1bee22e409f96e93d7e117393172a");
 
 		CmacKeys keys = new CmacKeys(key1,key2,cbcKey);
-		Cmac cmac = Cmac.compute(text, keys);
+		Cmac cmac = Cmac.compute(iv, text, keys);
 
 
 		System.out.println(Integer.toHexString((byte) cmac.getMac()[0]));

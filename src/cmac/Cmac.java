@@ -24,7 +24,7 @@ public class Cmac {
 		this.mac = mac;
 	}
 
-	public static Cmac compute(byte[] data,CmacKeys keys){
+	public static Cmac compute(byte[] iv, byte[] data, CmacKeys keys){
 
 		Cmac cMac = new Cmac();
 
@@ -49,7 +49,6 @@ public class Cmac {
 
 				byte[] cbcdata =  Arrays.copyOf(data, (nBlocks-1)*16);
 
-				byte[] iv =DatatypeConverter.parseHexBinary("00000000000000000000000000000000"); 
 				//CBC RAW
 				SecretKeySpec aesKey= new SecretKeySpec(keys.getCbcRawKey(),"AES");
 				IvParameterSpec ivparam = new IvParameterSpec(iv);
@@ -102,14 +101,10 @@ public class Cmac {
 
 			cMac.setMac(cbcRaw.doFinal(lastBData));
 
-
-
 		} catch (Exception  e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-
 
 		return cMac;
 	}

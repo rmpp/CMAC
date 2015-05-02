@@ -5,7 +5,7 @@ public class CmacKeys {
 	byte[] key1;
 	byte[] key2;
 	byte[] cbcRawKey;
-	
+
 	public CmacKeys() {
 		this.key1=null;
 		this.key2=null;
@@ -44,5 +44,5 @@ public class CmacKeys {
 	public void setCbcRawKey(byte[] cbcRawKey) {
 		this.cbcRawKey = cbcRawKey;
 	}
-	
+
 }

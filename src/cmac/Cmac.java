@@ -25,7 +25,7 @@ public class Cmac {
 	}
 
 	public static Cmac compute(byte[] data,CmacKeys keys){
-		
+
 		Cmac cMac = new Cmac();
 
 		try {
@@ -38,13 +38,13 @@ public class Cmac {
 			byte[] lastBData;
 
 			boolean padding=false;
-			
-			if(lastBlen>0){
-				padding=true;
+
+			if(lastBlen> 0){
+				padding = true;
 				nBlocks++;
 			}
 
-			
+
 			if(nBlocks > 1){
 
 				byte[] cbcdata =  Arrays.copyOf(data, (nBlocks-1)*16);
@@ -65,17 +65,24 @@ public class Cmac {
 
 			}else{
 
-				lastState = DatatypeConverter.parseHexBinary("00000000000000000000000000000000");
-				lastBData = Arrays.copyOfRange(data,(nBlocks-1)*16 ,(nBlocks)*16);
+				if(data.length==0){
+					lastState = DatatypeConverter.parseHexBinary("00000000000000000000000000000000");
+					lastBData = DatatypeConverter.parseHexBinary("00000000000000000000000000000000");
+					padding=true;
+
+				}else{
+
+					lastState = DatatypeConverter.parseHexBinary("00000000000000000000000000000000");
+					lastBData = Arrays.copyOfRange(data,(nBlocks-1)*16 ,(nBlocks)*16);
+				}
 			}
 
 
 			//Add Padding if needed
-			if(lastBlen!=0){
-					lastBData[lastBlen]= (byte) 128;
+			if(lastBlen!=0 ||padding){
+				lastBData[lastBlen]= (byte) 128;
 			}
 
-			
 
 			if(padding){
 				for (int i = 0; i < 16; i++) {
@@ -88,8 +95,6 @@ public class Cmac {
 
 			}
 
-
-			
 			SecretKeySpec aesKey= new SecretKeySpec(keys.getCbcRawKey(),"AES");
 			IvParameterSpec ivparam = new IvParameterSpec(lastState);
 			Cipher cbcRaw = Cipher.getInstance("AES/CBC/NoPadding");

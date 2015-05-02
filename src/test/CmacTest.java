@@ -11,7 +11,7 @@ import cmac.CmacKeys;
 
 public class CmacTest {
 
-	/*
+	
 	@Test
 	  public void testM0() {
 	    
@@ -24,11 +24,11 @@ public class CmacTest {
 		byte[] text= DatatypeConverter.parseHexBinary("");
 		
 		CmacKeys keys = new CmacKeys(key1,key2,cbcKey);
-		Cmac cMac = Cmac.compute(IV, text, keys);
+		Cmac cMac = Cmac.compute(text, keys);
 	
 	    assertArrayEquals(DatatypeConverter.parseHexBinary("bb1d6929e95937287fa37d129b756746"), cMac.getMac());
 	  }
-	*/
+	
 	
 	@Test
 	  public void testM1() {

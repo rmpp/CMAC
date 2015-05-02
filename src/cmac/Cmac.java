@@ -5,6 +5,7 @@ import java.util.Arrays;
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import javax.xml.bind.DatatypeConverter;
 
 
 public class Cmac {
@@ -23,7 +24,7 @@ public class Cmac {
 		this.mac = mac;
 	}
 
-	public static Cmac compute(byte[] iv, byte[] data,CmacKeys keys){
+	public static Cmac compute(byte[] data,CmacKeys keys){
 		
 		Cmac cMac = new Cmac();
 
@@ -48,11 +49,12 @@ public class Cmac {
 
 				byte[] cbcdata =  Arrays.copyOf(data, (nBlocks-1)*16);
 
+				byte[] iv =DatatypeConverter.parseHexBinary("00000000000000000000000000000000"); 
 				//CBC RAW
 				SecretKeySpec aesKey= new SecretKeySpec(keys.getCbcRawKey(),"AES");
 				IvParameterSpec ivparam = new IvParameterSpec(iv);
 				Cipher cbcRaw = Cipher.getInstance("AES/CBC/NoPadding");
-				cbcRaw.init(Cipher.ENCRYPT_MODE,aesKey, ivparam);
+				cbcRaw.init(Cipher.ENCRYPT_MODE,aesKey,ivparam);
 
 				byte[] cbcCt = cbcRaw.doFinal(cbcdata);
 
@@ -63,7 +65,7 @@ public class Cmac {
 
 			}else{
 
-				lastState = Arrays.copyOf(iv,16);
+				lastState = DatatypeConverter.parseHexBinary("00000000000000000000000000000000");
 				lastBData = Arrays.copyOfRange(data,(nBlocks-1)*16 ,(nBlocks)*16);
 			}
 

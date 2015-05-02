@@ -37,12 +37,10 @@ public class CmacTest {
 		byte[] key1 =  DatatypeConverter.parseHexBinary("fbeed618357133667c85e08f7236a8de");
 		byte[] key2 =  DatatypeConverter.parseHexBinary("f7ddac306ae266ccf90bc11ee46d513b");
 
-		byte[] IV = DatatypeConverter.parseHexBinary("00000000000000000000000000000000");
-
 		byte[] text= DatatypeConverter.parseHexBinary("6bc1bee22e409f96e93d7e117393172a");
 		
 		CmacKeys keys = new CmacKeys(key1,key2,cbcKey);
-		Cmac cMac = Cmac.compute(IV, text, keys);
+		Cmac cMac = Cmac.compute(text, keys);
 	
 	    assertArrayEquals(DatatypeConverter.parseHexBinary("070a16b46b4d4144f79bdd9dd04a287c"), cMac.getMac());
 	  }
@@ -56,12 +54,12 @@ public class CmacTest {
 		byte[] key1 =  DatatypeConverter.parseHexBinary("fbeed618357133667c85e08f7236a8de");
 		byte[] key2 =  DatatypeConverter.parseHexBinary("f7ddac306ae266ccf90bc11ee46d513b");
 
-		byte[] IV = DatatypeConverter.parseHexBinary("00000000000000000000000000000000");
-
-		byte[] text= DatatypeConverter.parseHexBinary("6bc1bee22e409f96e93d7e117393172aae2d8a571e03ac9c9eb76fac45af8e5130c81c46a35ce411");
+		byte[] text= DatatypeConverter.parseHexBinary("6bc1bee22e409f96e93d7e117393172aae"
+													+ "2d8a571e03ac9c9eb76fac45af8e5130c8"
+													+ "1c46a35ce411");
 		
 		CmacKeys keys = new CmacKeys(key1,key2,cbcKey);
-		Cmac cMac = Cmac.compute(IV, text, keys);
+		Cmac cMac = Cmac.compute(text, keys);
 	
 	    assertArrayEquals(DatatypeConverter.parseHexBinary("dfa66747de9ae63030ca32611497c827"), cMac.getMac());
 	  }
@@ -75,12 +73,11 @@ public class CmacTest {
 		byte[] key1 =  DatatypeConverter.parseHexBinary("fbeed618357133667c85e08f7236a8de");
 		byte[] key2 =  DatatypeConverter.parseHexBinary("f7ddac306ae266ccf90bc11ee46d513b");
 
-		byte[] IV = DatatypeConverter.parseHexBinary("00000000000000000000000000000000");
 
 		byte[] text= DatatypeConverter.parseHexBinary("6bc1bee22e409f96e93d7e117393172aae2d8a571e03ac9c9eb76fac45af8e5130c81c46a35ce411e5fbc1191a0a52eff69f2445df4f9b17ad2b417be66c3710");
 		
 		CmacKeys keys = new CmacKeys(key1,key2,cbcKey);
-		Cmac cMac = Cmac.compute(IV, text, keys);
+		Cmac cMac = Cmac.compute(text, keys);
 	
 	    assertArrayEquals(DatatypeConverter.parseHexBinary("51f0bebf7e3b9d92fc49741779363cfe"), cMac.getMac());
 	  }

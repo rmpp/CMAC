@@ -19,7 +19,7 @@ public class TestCmac {
 		byte[] text= DatatypeConverter.parseHexBinary("6bc1bee22e409f96e93d7e117393172a");
 
 		CmacKeys keys = new CmacKeys(key1,key2,cbcKey);
-		Cmac cmac = Cmac.compute(IV, text, keys);
+		Cmac cmac = Cmac.compute(text, keys);
 
 
 		System.out.println(Integer.toHexString((byte) cmac.getMac()[0]));

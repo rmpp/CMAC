@@ -6,21 +6,23 @@ import javax.xml.bind.DatatypeConverter;
 public class TestCmac {
 
 	public static void main(String[] args) {
-	
-			System.out.println("");
-			
-			byte[] key1 =  DatatypeConverter.parseHexBinary("000102030405060708090A0B0C0D0E0F");
-			byte[] cbcKey =  DatatypeConverter.parseHexBinary("2b7e151628aed2a6abf7158809cf4f3c");
 
-			byte[] IV = DatatypeConverter.parseHexBinary("000102030405060708090A0B0C0D0E0F");
+		System.out.println("");
 
-			byte[] text= DatatypeConverter.parseHexBinary("000102030405060708090A0B0C0D0E0F1122");
-			
-			CmacKeys keys = new CmacKeys(key1,key1,cbcKey);
-			Cmac mac = Cmac.compute(IV, text, keys);
-			
-			
-			System.out.println("");
+
+		byte[] cbcKey =  DatatypeConverter.parseHexBinary("2b7e151628aed2a6abf7158809cf4f3c");
+		byte[] key1 =  DatatypeConverter.parseHexBinary("fbeed618357133667c85e08f7236a8de");
+		byte[] key2 =  DatatypeConverter.parseHexBinary("f7ddac306ae266ccf90bc11ee46d513b");
+
+		byte[] IV = DatatypeConverter.parseHexBinary("00000000000000000000000000000000");
+
+		byte[] text= DatatypeConverter.parseHexBinary("6bc1bee22e409f96e93d7e117393172a");
+
+		CmacKeys keys = new CmacKeys(key1,key2,cbcKey);
+		Cmac cmac = Cmac.compute(IV, text, keys);
+
+
+		System.out.println(Integer.toHexString((byte) cmac.getMac()[0]));
 	}
 
 }

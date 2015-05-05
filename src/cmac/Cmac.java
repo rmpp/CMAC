@@ -57,7 +57,7 @@ public class Cmac {
 
 				byte[] cbcCt = cbc.doFinal(cbcdata);
 
-				//get cbc last state
+				//Get cbc last state
 				lastState = Arrays.copyOfRange(cbcCt,(nBlocks-2)*16, (nBlocks-1)*16);
 
 				lastBData = Arrays.copyOfRange(data,(nBlocks-1)*16 ,(nBlocks)*16);

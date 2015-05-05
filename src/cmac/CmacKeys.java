@@ -4,19 +4,19 @@ public class CmacKeys {
 
 	byte[] key1;
 	byte[] key2;
-	byte[] cbcRawKey;
+	byte[] cbcKey;
 
 	public CmacKeys() {
 		this.key1=null;
 		this.key2=null;
-		this.cbcRawKey=null;
+		this.cbcKey=null;
 	}
 
 	public CmacKeys(byte[] key1, byte[] key2, byte[] cbcRawKey) {
 		super();
 		this.key1 = key1;
 		this.key2 = key2;
-		this.cbcRawKey = cbcRawKey;
+		this.cbcKey = cbcRawKey;
 	}
 
 
@@ -37,12 +37,12 @@ public class CmacKeys {
 		this.key2 = key2;
 	}
 
-	public byte[] getCbcRawKey() {
-		return cbcRawKey;
+	public byte[] getCbcKey() {
+		return cbcKey;
 	}
 
-	public void setCbcRawKey(byte[] cbcRawKey) {
-		this.cbcRawKey = cbcRawKey;
+	public void setCbcKey(byte[] cbcKey) {
+		this.cbcKey = cbcKey;
 	}
 
 }
